@@ -19,9 +19,6 @@ const PokemonInfo = () => {
     dispatchPokemon(id)
   }, [dispatch, id])
 
-  console.log(pokemon)
-  console.log(loading)
-
   return ( //crear el componente que muestra info del pokemon
     <MainCss>
       {loading ? <Loading /> : (

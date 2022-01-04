@@ -32,12 +32,13 @@ const CardsContainer = () => {
 
     // manages filter by source - maneja filtrado por origen
     const filterListFunc = (source, type = "") => {
+      setPage(1)
       if (source === "both") {
         if (type !== "") {
           let temp = []
           list.forEach(pk => {
             pk.types.forEach(currType => {
-              //console.log(pk.name, " ", currType)
+              console.log(pk.name, " ", currType)
               if (currType !== null && currType.name === type)
                 temp.push(pk)
             })
@@ -86,7 +87,7 @@ const CardsContainer = () => {
 
   useEffect(() => {
     const sortList = param => {
-
+      setPage(1)
       if(param ==="id"){
         let temp = [...filteredList].sort((a,b)=>{
           if(a.id > b.id) return 1
@@ -143,7 +144,7 @@ const CardsContainer = () => {
 
   return (
     <CardsContainerCss>
-      <h1>Lite Dex</h1>
+      {filteredList.length === 0 ? <h1>No Results Found</h1> :<h1>Lite Dex</h1>}
       <Pagination page={page} setPage={setPage} length={filteredList.length} />
       <CardsGridCss>
         {loading ? <Loading /> : filteredList.map((pk, i) => (

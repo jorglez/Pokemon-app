@@ -139,7 +139,7 @@ const NameSearchResults = () => {
 
   return (
     <CardsContainerCss>
-      <h1>Henry Pokemon</h1>
+      {filteredList.length === 0 ? <h1>No Results Found</h1> :<h1>Lite Dex</h1>}
       {!error ? //shows "not found" message if pkmn doesn't exists -muestra "not found" si el pokemon no existe
         <CardsGridCss>
           {loading ? <Loading /> : filteredList.map((pk, i) => (

@@ -35,8 +35,8 @@ export const ImgContainerCss = styled.div`
 `
 
 export const BackgroundImage = styled.div`
-  width: 600px;
-  height: 600px;
+  width: 650px;
+  height: 650px;
   position: absolute;
   right: -100px;
   bottom: -100px;

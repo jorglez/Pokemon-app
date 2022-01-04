@@ -13,19 +13,29 @@ const NewPokemon = () => {
   const typesList = useSelector(state => state.getTypesReducer.types)
   const loadingTypes = useSelector(state => state.getTypesReducer.loading)
 
-  useEffect(() => {
-    const dispatchTypesList = () => dispatch(getTypesAction())
-    if (typesList.length === 0) dispatchTypesList()
-  }, [dispatch, typesList.length])
+  //saves error ig there's no name input - guarda error si no se ha escrito nombre
+  const [error, setError] = useState({ status: false, msg: "" })
+  const [message, setMessage] = useState("Add Pokemon")
 
   //Redux connection to send data - Conexión a Redux para mandar los datos
   const response = useSelector(state => state.postPokemonReducer.response)
   const loadingResponse = useSelector(state => state.postPokemonReducer.loading)
 
-  //saves error ig there's no name input - guarda error si no se ha escrito nombre
-  const [error, setError] = useState({ status: false, msg: "" })
 
-  const [message, setMessage] = useState("Add Pokemon")
+  useEffect(() => {
+    const dispatchTypesList = () => dispatch(getTypesAction())
+    if (typesList.length === 0) dispatchTypesList()
+
+    if (response.msg) {
+      setMessage(response.msg)
+      setTimeout(() => {
+        setMessage("Add Pokemon")
+      }, 3000);
+    }
+    //eslint-disable-next-line
+  }, [dispatch, typesList.length, response])
+
+
 
   //saves the form data to send it - guarda los datos del form para enviarlos
   const [pokemonData, getPokemonData] = useState({
@@ -62,17 +72,26 @@ const NewPokemon = () => {
     }
     let { type1, type2 } = pokemonData
 
-    //Types can be empty but not the same - Los tipos pueden estar vacíos pero no repetirse
-    if (type1 !== "" && type1 !== "0") {
-      if ((type1 === type2)) {
-        setError({ status: true, msg: "Types can't be duplicate" })
+    //at least one type must be selected - al menos se debe elegir un tipo
 
-        setTimeout(() => {
-          setError({ status: false, msg: "" })
-        }, 3000);
-        return
-      }
+    if(type1 ===""){
+      setError({ status: true, msg: "You must choose at least one type" })
+
+      setTimeout(() => {
+        setError({ status: false, msg: "" })
+      }, 3000);
+      return
     }
+
+    if ((type1 === type2)) {
+      setError({ status: true, msg: "Types can't be duplicate" })
+
+      setTimeout(() => {
+        setError({ status: false, msg: "" })
+      }, 3000);
+      return
+    }
+
 
     //If there are no errors, send the data - Si no hay errores, mandar los datos
     const dispatchPostPokemon = pokemonData => dispatch(postPokemonAction(pokemonData))
@@ -86,7 +105,7 @@ const NewPokemon = () => {
 
   return (
     <NewPokemonCss onSubmit={formHandler}>
-      {!error.status ? <h2>{message}</h2> : <h2 className="error">{error.msg}</h2> }
+      {!error.status ? <h2>{message}</h2> : <h2 className="error">{error.msg}</h2>}
       <FormSplitterCss>
         <div>
           <FormControlCss>
@@ -147,9 +166,9 @@ const NewPokemon = () => {
 
 
         </div>
-        <div style={{zIndex:3}}>
+        <div style={{ zIndex: 3 }}>
           <ImgContainerCss>
-            {pokemonData.img ? <img src={pokemonData.img} alt="" on /> : null}
+            {pokemonData.img !=="" ? <img src={pokemonData.img} alt="" /> : null}
           </ImgContainerCss>
 
           <FormControlCss>
@@ -183,7 +202,7 @@ const NewPokemon = () => {
           <FormButton type="submit">{loadingResponse ? "Saving..." : "Save Pokemon"}</FormButton>
         </div>
       </FormSplitterCss>
-      <BackgroundImg src="/pkbll.png"/>
+      <BackgroundImg src="/pkbll.png" />
     </NewPokemonCss >
   );
 }
