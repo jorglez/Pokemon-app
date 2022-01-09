@@ -13,10 +13,10 @@ export const GET_TYPES = "GET_TYPES"
 export const GET_TYPES_SUCCESS = "GET_TYPES_SUCCESS"
 export const GET_TYPES_ERROR = "GET_TYPES_ERROR"
 
-//Get pokemon by ID - Obtener pokemon por su ID
-export const GET_BY_ID = "GET_BY_ID"
-export const GET_BY_ID_SUCCESS = "GET_BY_ID_SUCCESS"
-export const GET_BY_ID_ERROR = "GET_BY_ID_ERROR"
+//Pokemon info types - types para pokemon info
+export const POKEMON_INFO = "POKEMON_INFO"
+
+
 
 //Post pokemon types - types para guardar nuevo pokemon
 export const POST_POKEMON = "POST_POKEMON"

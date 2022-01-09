@@ -22,7 +22,7 @@ const NameSearch = () => {
     if(searchName.trim() === "") return console.log("escribe algo")
 
     dispatchSearchByName(searchName)
-    history.push("/results")
+    history.push(`/results?name=${searchName}`)
   }
   return (
     <NavFormCss onSubmit={handleSubmit}>

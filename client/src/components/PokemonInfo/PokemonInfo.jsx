@@ -1,38 +1,49 @@
-import { useParams } from "react-router-dom";
-import { getByIdAction } from "../../redux/actions/getByIdActions";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+
+import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 import Loading from "../CardsSection/Loading";
-import { ImgContainerCss, InfoDiv, MainCss,BackgroundImage } from "../styles/PokemonInfoCss";
+import { ImgContainerCss, InfoDiv, MainCss, BackgroundImage } from "../styles/PokemonInfoCss";
 import { FormControlCss, LabelCss } from "../styles/NavBarCss";
 
+
 const PokemonInfo = () => {
-  const dispatch = useDispatch()
 
-  //get loading and pokemon state - obtener state de carga y pokemon
-  const { pokemon } = useSelector(state => state.getByIdReducer)
-  const { loading } = useSelector(state => state.getByIdReducer)
-  const { id } = useParams()
+  const pokemonInfo = useSelector(state => state.pokemonInfoReducer.pokemon)
+  let loading = false
 
-  useEffect(() => {//crear funcion del dispatch y ver que funcione
-    const dispatchPokemon = id => dispatch(getByIdAction(id))
-    dispatchPokemon(id)
-  }, [dispatch, id])
+  const [pokemon, setPokemon] = useState(pokemonInfo)
+
+  useEffect(() => {
+    const checkPokemon = () => {
+      let local = JSON.parse(localStorage.getItem("pokemonInfoLocal"))
+      console.log()
+      if (Object.keys(pokemonInfo).length !== 0) {
+        localStorage.setItem("pokemonInfoLocal", JSON.stringify(pokemonInfo))
+        local = JSON.parse(localStorage.getItem("pokemonInfoLocal"))
+      }
+  
+      setPokemon(local)
+    }
+
+    checkPokemon()
+  }, [])
+
+
 
   return ( //crear el componente que muestra info del pokemon
     <MainCss>
       {loading ? <Loading /> : (
         <InfoDiv>
           {!pokemon.types ? null : <BackgroundImage style={{
-            WebkitMaskImage:`url("/type-icons/${pokemon.types[0].name}.svg")`,
-            WebkitMaskPosition:"center",
-            WebkitMaskRepeat:"no-repeat",
-            WebkitMaskSize:"600px"
+            WebkitMaskImage: `url("/type-icons/${pokemon.types[0].name}.svg")`,
+            WebkitMaskPosition: "center",
+            WebkitMaskRepeat: "no-repeat",
+            WebkitMaskSize: "600px"
           }}
-          className={pokemon.types[0].name}
+            className={pokemon.types[0].name}
           ></BackgroundImage>}
-          <h1 style={{ textAlign: "center", textTransform: "uppercase"}}>{pokemon.name}</h1>
-          <h2 style={{ textAlign: "center", zIndex:2  }}>Base Stats:</h2>
+          <h1 style={{ textAlign: "center", textTransform: "uppercase" }}>{pokemon.name}</h1>
+          <h2 style={{ textAlign: "center", zIndex: 2 }}>Base Stats:</h2>
           <ImgContainerCss>
             <img src={pokemon.img} alt="" />
           </ImgContainerCss>
@@ -65,9 +76,9 @@ const PokemonInfo = () => {
             </FormControlCss>
           </div>
 
-          
+
         </InfoDiv>
-        
+
       )}
 
     </MainCss>

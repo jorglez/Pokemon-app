@@ -12,7 +12,7 @@ const NameSearchResults = () => {
   const dispatch = useDispatch()
   const { loading, error } = useSelector(state => state.searchPokemonReducer)
   const list = useSelector(state => state.searchPokemonReducer.pokemonData)
-  console.log(error)
+
   //get filterReducer params - obtiene parametros del filterReducer
   const { pokemonType, source } = useSelector(state => state.filterReducer)
 
