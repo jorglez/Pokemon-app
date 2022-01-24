@@ -14,29 +14,32 @@ export const InfoDiv = styled.div`
   display: grid;
   position: relative;
   overflow: hidden;
-  padding: 20px 40px;
+  padding: 20px;
   border-radius: 30px;
   border: solid 1px rgb(120,120,120);
-  gap: 30px;
+  gap: 10px;
   grid-template-columns: repeat(2, 1fr);
-  width: 900px;
+  width: 600px;
   
   & div{
     z-index: 2;
   }
+  &.recharts-responsive-container{
+    margin: auto;
+  }
 `
 
 export const ImgContainerCss = styled.div`
-  width: 400px;
-
+  width: 200px;
+  margin: auto;
   & img{
     width: 100%;
   }
 `
 
 export const BackgroundImage = styled.div`
-  width: 650px;
-  height: 650px;
+  width: 430px;
+  height: 430px;
   position: absolute;
   right: -100px;
   bottom: -100px;

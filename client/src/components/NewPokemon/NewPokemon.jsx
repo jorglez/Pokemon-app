@@ -44,8 +44,8 @@ const NewPokemon = () => {
     attack: 10,
     defense: 10,
     speed: 10,
-    height: 10,
-    weight: 10,
+    height: 0,
+    weight: 0,
     img: "",
     type1: "",
     type2: ""
@@ -92,7 +92,9 @@ const NewPokemon = () => {
       return
     }
 
-
+    pokemonData.height = pokemonData.height*10
+    pokemonData.weight = pokemonData.weight*10
+    
     //If there are no errors, send the data - Si no hay errores, mandar los datos
     const dispatchPostPokemon = pokemonData => dispatch(postPokemonAction(pokemonData))
     dispatchPostPokemon(pokemonData)
@@ -119,48 +121,48 @@ const NewPokemon = () => {
           <FormControlCss>
             <LabelCss htmlFor="hp">hp:</LabelCss>
             <RangeGroupCss>
-              <RangeCss min="10" max="200" type="range" name="hp" id="hp" placeholder="Pokemon hp" value={pokemonData.hp} onChange={inputHandler} />
-              <InputCss min="10" max="200" type="text" name="hp" id="hp" value={pokemonData.hp} onChange={inputHandler} />
+              <RangeCss min="10" max="150" type="range" name="hp" id="hp" placeholder="Pokemon hp" value={pokemonData.hp} onChange={inputHandler} />
+              <InputCss min="10" max="150" type="text" name="hp" id="hp" value={pokemonData.hp} onChange={inputHandler} disabled/>
             </RangeGroupCss>
           </FormControlCss>
 
           <FormControlCss>
             <LabelCss htmlFor="attack">attack:</LabelCss>
             <RangeGroupCss>
-              <RangeCss min="10" max="200" type="range" name="attack" id="attack" placeholder="Pokemon attack" value={pokemonData.attack} onChange={inputHandler} />
-              <InputCss min="10" max="200" type="text" name="attack" id="attack" value={pokemonData.attack} onChange={inputHandler} />
+              <RangeCss min="10" max="150" type="range" name="attack" id="attack" placeholder="Pokemon attack" value={pokemonData.attack} onChange={inputHandler} />
+              <InputCss min="10" max="150" type="text" name="attack" id="attack" value={pokemonData.attack} onChange={inputHandler} disabled/>
             </RangeGroupCss>
           </FormControlCss>
 
           <FormControlCss>
             <LabelCss htmlFor="defense">defense:</LabelCss>
             <RangeGroupCss>
-              <RangeCss min="10" max="200" type="range" name="defense" id="defense" placeholder="Pokemon defense" value={pokemonData.defense} onChange={inputHandler} />
-              <InputCss min="10" max="200" type="text" name="defense" id="defense" value={pokemonData.defense} onChange={inputHandler} />
+              <RangeCss min="10" max="150" type="range" name="defense" id="defense" placeholder="Pokemon defense" value={pokemonData.defense} onChange={inputHandler} />
+              <InputCss min="10" max="150" type="text" name="defense" id="defense" value={pokemonData.defense} onChange={inputHandler} disabled/>
             </RangeGroupCss>
           </FormControlCss>
 
           <FormControlCss>
             <LabelCss htmlFor="speed">speed:</LabelCss>
             <RangeGroupCss>
-              <RangeCss min="10" max="200" type="range" name="speed" id="speed" placeholder="Pokemon speed" value={pokemonData.speed} onChange={inputHandler} />
-              <InputCss min="10" max="200" type="text" name="speed" id="speed" value={pokemonData.speed} onChange={inputHandler} />
+              <RangeCss min="10" max="150" type="range" name="speed" id="speed" placeholder="Pokemon speed" value={pokemonData.speed} onChange={inputHandler} />
+              <InputCss min="10" max="150" type="text" name="speed" id="speed" value={pokemonData.speed} onChange={inputHandler} disabled/>
             </RangeGroupCss>
           </FormControlCss>
 
           <FormControlCss>
-            <LabelCss htmlFor="height">height:</LabelCss>
+            <LabelCss htmlFor="height">height (m):</LabelCss>
             <RangeGroupCss>
-              <RangeCss min="10" max="200" type="range" name="height" id="height" placeholder="Pokemon height" value={pokemonData.height} onChange={inputHandler} />
-              <InputCss min="10" max="200" type="text" name="height" id="height" value={pokemonData.height} onChange={inputHandler} />
+              <RangeCss min="0" max="50" type="range" name="height" id="height" placeholder="Pokemon height" value={pokemonData.height} onChange={inputHandler} />
+              <InputCss min="0" max="50" type="text" name="height" id="height" value={pokemonData.height} onChange={inputHandler} disabled/>
             </RangeGroupCss>
           </FormControlCss>
 
           <FormControlCss>
-            <LabelCss htmlFor="weight">weight:</LabelCss>
+            <LabelCss htmlFor="weight">weight (kg):</LabelCss>
             <RangeGroupCss>
-              <RangeCss min="10" max="200" type="range" name="weight" id="weight" placeholder="Pokemon weight" value={pokemonData.weight} onChange={inputHandler} />
-              <InputCss min="10" max="200" type="text" name="weight" id="weight" value={pokemonData.weight} onChange={inputHandler} />
+              <RangeCss min="0" max="150" type="range" name="weight" id="weight" placeholder="Pokemon weight" value={pokemonData.weight} onChange={inputHandler} />
+              <InputCss min="0" max="150" type="text" name="weight" id="weight" value={pokemonData.weight} onChange={inputHandler} disabled/>
             </RangeGroupCss>
           </FormControlCss>
 

@@ -6,6 +6,7 @@ import postPokemonReducer from "./postPokemonReducer";
 import filterReducer from "./filterReducer";
 import sortReducer from "./sortReducer";
 import pokemonInfoReducer from "./pokemonInfoReducer";
+import deletePokemonReducer from "./deletePokemonReducer";
 
 const reducer = combineReducers({
   searchPokemonReducer,
@@ -14,7 +15,8 @@ const reducer = combineReducers({
   postPokemonReducer,
   filterReducer,
   sortReducer,
-  pokemonInfoReducer
+  pokemonInfoReducer,
+  deletePokemonReducer
 })
 
 export default reducer

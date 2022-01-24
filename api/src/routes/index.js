@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { Pokemon, Type } = require('../db');
 const axios = require("axios");
-const {Op} = require("sequelize")
+const { Op } = require("sequelize")
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -81,7 +81,7 @@ router.get('/pokemons', async (req, res) => {
     try {
       let { name } = req.query
       let apiPokemon = await pokemonSearch(name)
-      let localData = await Pokemon.findAll({ where: { name:{[Op.iLike]:name} }, include: Type })
+      let localData = await Pokemon.findAll({ where: { name: { [Op.iLike]: name } }, include: Type })
       //concat arrays so theres a single array to iterate
       //concatenar arreglos para tener uno solo en el cual iterar
       if (!apiPokemon) return res.json(localData)
@@ -176,5 +176,19 @@ router.post("/pokemons", async (req, res) => {
 
 })
 
+router.delete("/pokemons/:id", async (req, res) => {
+  try {
+    const { id } = req.params
+    const exists = await Pokemon.findOne({where:{id}})
+
+    if(!exists) return res.status(404).json({ msg: "Pokemon no encontrado" })
+
+    await Pokemon.destroy({ where: { id } })
+    return res.json({ msg: "Pokemon eliminado exitosamente" })
+
+  } catch (error) {
+    return res.status(500).json({ msg: "error de servidor" })
+  }
+})
 
 module.exports = router;

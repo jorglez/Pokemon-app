@@ -102,8 +102,8 @@ const CardsContainer = () => {
         //if modified directly, the component won't update, so a copy of the array is needed and then the new value is passed to the list state
         //el componente no se actualiza si la lista se modifica directamente, es necesario tomar una copia de la lista, modificarla y luego guardar el valor nuevo en el state
         let temp = [...filteredList].sort((a, b) => {
-          if (a.name > b.name) return 1
-          if (a.name < b.name) return -1
+          if (a.name.toLowerCase() > b.name.toLowerCase()) return 1
+          if (a.name.toLowerCase() < b.name.toLowerCase()) return -1
           return 0
         })
         return setFilteredList(temp)
@@ -112,8 +112,8 @@ const CardsContainer = () => {
       //same but < and > switch places - lo mismo pero < y > cambian de lugar
       if (param === "ztoa") {
         let temp = [...filteredList].sort((a, b) => {
-          if (a.name < b.name) return 1
-          if (a.name > b.name) return -1
+          if (a.name.toLowerCase() < b.name.toLowerCase()) return 1
+          if (a.name.toLowerCase() > b.name.toLowerCase()) return -1
           return 0
         })
         return setFilteredList(temp)

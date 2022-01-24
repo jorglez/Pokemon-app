@@ -16,7 +16,10 @@ export const GET_TYPES_ERROR = "GET_TYPES_ERROR"
 //Pokemon info types - types para pokemon info
 export const POKEMON_INFO = "POKEMON_INFO"
 
-
+//delete pokemon types - types para eliminar pokemon
+export const DELETE_POKEMON = "DELETE_POKEMON"
+export const DELETE_POKEMON_SUCCESS = "DELETE_POKEMON_SUCCESS"
+export const DELETE_POKEMON_ERROR = "DELETE_POKEMON_ERROR"
 
 //Post pokemon types - types para guardar nuevo pokemon
 export const POST_POKEMON = "POST_POKEMON"
